@@ -23,6 +23,17 @@
 	.on('shakeOff', function(e){
 		myShakeEvent.stop();
 	})
+	// useOpportunity
+	.on('useOpportunity', function(e){
+		var root = $(this).find('.opportunity');
+		var count = root.find('[data-count]');
+		var num = count.text();
+
+		if( num >=1 ) num = num/1 - 1;
+		else num = 0;
+
+		count.text(num);
+	})
 	// candy
 	.on('openCandy', function(e){
 		$('.shake-result').addClass('on');
@@ -52,8 +63,10 @@
 			root.find('.p-1').hide();
 			root.find('.note').hide();
 			root.find('strong').text(_data.money);
+			root.find('.no-money').show();
 		}
 		else {
+			root.find('.no-money').hide();
 			root.find('strong').text(_data.money);
 			root.find('.p-2').show();
 			root.find('.p-1').show();

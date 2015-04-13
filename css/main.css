@@ -364,6 +364,18 @@ nav .nav-justified li a:hover {
   background-size: contain;
   background-position: center;
 }
+.opportunity {
+  position: absolute;
+  width: 100%;
+  top: 48px;
+  left: 0;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+}
+.opportunity [data-count] {
+  color: red;
+}
 .user-list {
   position: absolute;
   width: 100%;
@@ -526,13 +538,13 @@ nav .nav-justified li a:hover {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 75%;
+  width: 50%;
   text-align: center;
   color: #fff;
 }
 .shake-result a .inner {
-  padding-top: 67%;
-  background: url(../img/candy.png) no-repeat;
+  padding-top: 150%;
+  background: url(../img/redpacket.png) no-repeat;
   background-position: center top;
   background-size: 100%;
   -webkit-transform: translate(-50%, -50%);
@@ -677,6 +689,9 @@ nav .nav-justified li a:hover {
 .redpacket-result .inner .note {
   font-size: 12px;
   color: #ebe9d2;
+}
+.redpacket-result .inner .no-money {
+  margin-top: 120px;
 }
 .redpacket-result .close {
   width: 28px;

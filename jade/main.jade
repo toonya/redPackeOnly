@@ -17,7 +17,7 @@ block page
 				li 张**拆开了8.88元的红包
 				li 张**拆开了8.88元的红包
 
-		.cloud
+		//- .cloud
 		.shake
 			.inner
 			.audio.
@@ -28,7 +28,7 @@ block page
 
 		.shake-result
 			a.candy
-				.inner 打开糖果收红包
+				.inner 打开红包收零钱咯!
 
 		.notice.begin
 			.inner
@@ -54,8 +54,9 @@ block page
 					strong 9.99
 					small 元
 				.note 已存入微信钱包
+				.no-money 分享获得更多抽奖机会
 
-
+		.opportunity 您当前有 <span class="p-lr-xs" data-count>3</span> 次摇奖机会
 
 		nav
 			ul.nav.nav-justified
@@ -96,6 +97,17 @@ block page
 					// 1. ajax
 					
 					audioPlayer._audio.play();
+					
+					if( $('[data-count]').text() <= 0 ) {
+						$('.game').trigger('openNoOpportunity');
+						return;
+					}
+					
+					//- 本地测试用
+					//- $('.game').trigger('useOpportunity');
+					//- $('.game').trigger('setRedpacket', { title: '运气有点差哦', money: '0.00' });
+					//- $('.game').trigger('openCandy');
+					//- return ;
 
 					$.ajax({
 						type: "POST",
@@ -114,6 +126,7 @@ block page
 							//	opportunity: true,
 							//	title: '',
 							//	money: ''
+							//  没有的时候返回 0.00
 							// }
 							$('.game').trigger('setRedpacket', { title: msg.title, money: msg.money });
 							$('.game').trigger('openCandy');
@@ -124,6 +137,8 @@ block page
 							// msg.opportunity = false
 							$('.game').trigger('openNoOpportunity');
 						}
+
+						$('.game').trigger('useOpportunity');
 					})
 					.fail(function(){
 						alert('网络错误，请重试');

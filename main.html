@@ -27,7 +27,6 @@
                     <li>张**拆开了8.88元的红包</li>
                 </ul>
             </div>
-            <div class="cloud"></div>
             <div class="shake">
                 <div class="inner"></div>
                 <div class="audio">
@@ -39,7 +38,7 @@
             </div>
             <div class="shake-result">
                 <a class="candy">
-                    <div class="inner">打开糖果收红包</div>
+                    <div class="inner">打开红包收零钱咯!</div>
                 </a>
             </div>
             <div class="notice begin">
@@ -73,8 +72,11 @@
                         <small>元</small>
                     </div>
                     <div class="note">已存入微信钱包</div>
+                    <div class="no-money">分享获得更多抽奖机会</div>
                 </div>
             </div>
+            <div class="opportunity">您当前有
+                <span class="p-lr-xs" data-count>3</span> 次摇奖机会</div>
             <nav>
                 <ul class="nav nav-justified">
                     <li><a href="redpacket.html">红包</a></li>
@@ -112,6 +114,16 @@
                 {
                     // 1. ajax
                     audioPlayer._audio.play();
+                    if ($('[data-count]').text() <= 0)
+                    {
+                        $('.game').trigger('openNoOpportunity');
+                        return;
+                    }
+                    //- 本地测试用
+                    //- $('.game').trigger('useOpportunity');
+                    //- $('.game').trigger('setRedpacket', { title: '运气有点差哦', money: '0.00' });
+                    //- $('.game').trigger('openCandy');
+                    //- return ;
                     $.ajax(
                         {
                             type: "POST",
@@ -134,6 +146,7 @@
                                 //	opportunity: true,
                                 //	title: '',
                                 //	money: ''
+                                //  没有的时候返回 0.00
                                 // }
                                 $('.game').trigger('setRedpacket',
                                 {
@@ -148,6 +161,7 @@
                                 // msg.opportunity = false
                                 $('.game').trigger('openNoOpportunity');
                             }
+                            $('.game').trigger('useOpportunity');
                         })
                         .fail(function()
                         {
