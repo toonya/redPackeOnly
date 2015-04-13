@@ -34,6 +34,15 @@
 
 		count.text(num);
 	})
+	.on('setOpportunity', function(e, _num){
+		var root = $(this).find('.opportunity');
+		var count = root.find('[data-count]');
+		var num = _num;
+
+		if( num <=0 ) num = 0;
+
+		count.text(num);
+	})
 	// candy
 	.on('openCandy', function(e){
 		$('.shake-result').addClass('on');

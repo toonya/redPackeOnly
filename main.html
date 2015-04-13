@@ -114,20 +114,20 @@
                 {
                     // 1. ajax
                     audioPlayer._audio.play();
-                    if ($('[data-count]').text() <= 0)
-                    {
-                        $('.game').trigger('openNoOpportunity');
-                        return;
-                    }
                     //- 本地测试用
-                    //- $('.game').trigger('useOpportunity');
+                    //- if( $('[data-count]').text() <= 0 ) {
+                    //- 	$('.game').trigger('openNoOpportunity');
+                    //- 	return;
+                    //- }
+                    //- //- $('.game').trigger('useOpportunity');
+                    //- $('.game').trigger('setOpportunity', 0);
                     //- $('.game').trigger('setRedpacket', { title: '运气有点差哦', money: '0.00' });
                     //- $('.game').trigger('openCandy');
                     //- return ;
                     $.ajax(
                         {
                             type: "POST",
-                            url: "some.php",
+                            url: "some.php", // 修改地址
                             data:
                             {},
                             dataType: 'json',
@@ -145,8 +145,8 @@
                                 // var msg = {
                                 //	opportunity: true,
                                 //	title: '',
-                                //	money: ''
-                                //  没有的时候返回 0.00
+                                //  count: 3, 返回抽奖次数
+                                //	money: '', 没有的时候返回 0.00
                                 // }
                                 $('.game').trigger('setRedpacket',
                                 {
@@ -161,7 +161,8 @@
                                 // msg.opportunity = false
                                 $('.game').trigger('openNoOpportunity');
                             }
-                            $('.game').trigger('useOpportunity');
+                            $('.game').trigger('setOpportunity', msg.count);
+                            //- $('.game').trigger('useOpportunity');
                         })
                         .fail(function()
                         {
